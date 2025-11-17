@@ -201,7 +201,13 @@ Jarvis++ demonstrates a complete agentic system with:
 
 All while running locally, offline, reliably, and cost-free for reproducible evaluation.
 
---- 
-### GitHub Repo
-GitHub Repository : 
+----
+### 👨‍💻 Author
+Kethari Madhu Sudhan Reddy <br>
+Python Developer • ML Enthusiast • Automation Lover<br>
+Contact me : maddoxer143@gmail.com
+
+### 📜 License
+This project is Open Source.<br>
+Feel free to modify, enhance, or reuse it.
 
