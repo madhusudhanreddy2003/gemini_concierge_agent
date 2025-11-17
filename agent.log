@@ -1,0 +1,224 @@
+2025-11-15 12:01:55,663 [INFO] jarvis_agent - Initializing Gemini client
+2025-11-15 12:01:55,773 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:02:14,434 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:02:14,434 [INFO] jarvis_agent - Calling Gemini model 'gemini-2.0-flash-thinking-exp-1219' with prompt length=1914 chars
+2025-11-15 12:02:14,436 [INFO] google_genai.models - AFC is enabled with max remote calls: 10.
+2025-11-15 12:02:14,817 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-thinking-exp-1219:generateContent "HTTP/1.1 429 Too Many Requests"
+2025-11-15 12:02:14,817 [ERROR] jarvis_agent - Error calling Gemini model: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp\nPlease retry in 44.958765609s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash-exp'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash-exp', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '44s'}]}}
+2025-11-15 12:02:14,817 [ERROR] jarvis_agent - Fatal error in main loop: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp\nPlease retry in 44.958765609s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash-exp'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash-exp', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '44s'}]}}
+Traceback (most recent call last):
+  File "D:\My Projects\gemini_concierge_agent\agent.py", line 322, in main
+    reply = agent.chat(user_msg)
+  File "D:\My Projects\gemini_concierge_agent\agent.py", line 238, in chat
+    raw = self._call_model(prompt)
+  File "D:\My Projects\gemini_concierge_agent\agent.py", line 158, in _call_model
+    response = client.models.generate_content(
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\google\genai\models.py", line 5020, in generate_content
+    response = self._generate_content(
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\google\genai\models.py", line 3832, in _generate_content
+    response = self._api_client.request(
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\google\genai\_api_client.py", line 1331, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\google\genai\_api_client.py", line 1167, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\tenacity\__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\tenacity\__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\_base.py", line 439, in result
+    return self.__get_result()
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\_base.py", line 391, in __get_result
+    raise self._exception
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\google\genai\_api_client.py", line 1144, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "C:\Users\Madhu Sudhan\AppData\Local\Programs\Python\Python39\lib\site-packages\google\genai\errors.py", line 108, in raise_for_response
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp\nPlease retry in 44.958765609s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash-exp'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash-exp', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '44s'}]}}
+2025-11-15 12:25:58,421 [INFO] jarvis_agent - Selected backend: hf
+2025-11-15 12:25:58,421 [INFO] jarvis_agent - Initializing Hugging Face client with model=google/gemma-2-9b-it
+2025-11-15 12:25:58,422 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:26:18,690 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:26:18,691 [INFO] jarvis_agent - Calling LLM backend 'hf' with prompt length=1933 chars
+2025-11-15 12:26:18,989 [INFO] httpx - HTTP Request: GET https://huggingface.co/api/models/google/gemma-2-9b-it?expand=inferenceProviderMapping "HTTP/1.1 200 OK"
+2025-11-15 12:26:19,005 [ERROR] jarvis_agent - Error calling Hugging Face model: Model google/gemma-2-9b-it is not supported for task text-generation and provider nebius. Supported task: conversational.
+2025-11-15 12:26:19,005 [INFO] jarvis_agent - Parsed JSON action: {'action': 'respond', 'content': "I couldn't reach the Hugging Face model due to an error.\n\nTechnical details: Model google/gemma-2-9b-it is not supported for task text-generation and provider nebius. Supported task: conversational."}
+2025-11-15 12:26:19,005 [INFO] jarvis_agent - Responding directly to user. Length=198 chars
+2025-11-15 12:28:23,279 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:28:23,279 [INFO] jarvis_agent - Calling LLM backend 'hf' with prompt length=2171 chars
+2025-11-15 12:28:23,279 [ERROR] jarvis_agent - Error calling Hugging Face model: Model google/gemma-2-9b-it is not supported for task text-generation and provider nebius. Supported task: conversational.
+2025-11-15 12:28:23,279 [INFO] jarvis_agent - Parsed JSON action: {'action': 'respond', 'content': "I couldn't reach the Hugging Face model due to an error.\n\nTechnical details: Model google/gemma-2-9b-it is not supported for task text-generation and provider nebius. Supported task: conversational."}
+2025-11-15 12:28:23,279 [INFO] jarvis_agent - Responding directly to user. Length=198 chars
+2025-11-15 12:28:42,402 [INFO] jarvis_agent - Selected backend: hf
+2025-11-15 12:28:42,402 [INFO] jarvis_agent - Initializing Hugging Face client with model=mistralai/Mistral-7B-Instruct-v0.2
+2025-11-15 12:28:42,402 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:28:55,300 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:28:55,301 [INFO] jarvis_agent - Calling LLM backend 'hf' with prompt length=1933 chars
+2025-11-15 12:28:55,668 [INFO] httpx - HTTP Request: GET https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.2?expand=inferenceProviderMapping "HTTP/1.1 200 OK"
+2025-11-15 12:28:55,668 [ERROR] jarvis_agent - Error calling Hugging Face model: Model mistralai/Mistral-7B-Instruct-v0.2 is not supported for task text-generation and provider featherless-ai. Supported task: conversational.
+2025-11-15 12:28:55,668 [INFO] jarvis_agent - Parsed JSON action: {'action': 'respond', 'content': "I couldn't reach the Hugging Face model due to an error.\n\nTechnical details: Model mistralai/Mistral-7B-Instruct-v0.2 is not supported for task text-generation and provider featherless-ai. Supported task: conversational."}
+2025-11-15 12:28:55,668 [INFO] jarvis_agent - Responding directly to user. Length=220 chars
+2025-11-15 12:34:36,869 [INFO] jarvis_agent - Selected backend: hf
+2025-11-15 12:34:36,869 [INFO] jarvis_agent - Initializing Hugging Face client with model=mistralai/Mistral-7B-Instruct-v0.2
+2025-11-15 12:34:36,869 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:34:56,208 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:34:56,209 [ERROR] jarvis_agent - Fatal error in main loop: 'GeminiAgent' object has no attribute '_compact_context'
+Traceback (most recent call last):
+  File "D:\My Projects\gemini_concierge_agent\agent.py", line 369, in main
+    reply = agent.chat(user_msg)
+  File "D:\My Projects\gemini_concierge_agent\agent.py", line 286, in chat
+    raw = self._call_model(prompt)
+  File "D:\My Projects\gemini_concierge_agent\agent.py", line 143, in _call_model
+    self._compact_context()
+AttributeError: 'GeminiAgent' object has no attribute '_compact_context'
+2025-11-15 12:37:08,572 [INFO] jarvis_agent - Selected backend: hf
+2025-11-15 12:37:08,572 [INFO] jarvis_agent - Initializing Hugging Face client with model=mistralai/Mistral-7B-Instruct-v0.2
+2025-11-15 12:37:08,573 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:37:19,833 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:37:19,833 [INFO] jarvis_agent - Calling LLM backend 'hf' with prompt length=1933 chars
+2025-11-15 12:37:20,156 [INFO] httpx - HTTP Request: POST https://router.huggingface.co/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-11-15 12:37:20,156 [ERROR] jarvis_agent - Error calling Hugging Face model: (Request ID: Root=1-691826a8-3a8dba2264753725494d787e;4d82b76e-77da-4b6b-b109-cb611b206d36)
+
+Bad request:
+{'message': "The requested model 'mistralai/Mistral-7B-Instruct-v0.2' is not supported by any provider you have enabled.", 'type': 'invalid_request_error', 'param': 'model', 'code': 'model_not_supported'}
+2025-11-15 12:37:20,156 [INFO] jarvis_agent - Parsed JSON action: {'action': 'respond', 'content': 'I couldn\'t reach the Hugging Face model due to an error.\n\nTechnical details: (Request ID: Root=1-691826a8-3a8dba2264753725494d787e;4d82b76e-77da-4b6b-b109-cb611b206d36)\n\nBad request:\n{\'message\': "The requested model \'mistralai/Mistral-7B-Instruct-v0.2\' is not supported by any provider you have enabled.", \'type\': \'invalid_request_error\', \'param\': \'model\', \'code\': \'model_not_supported\'}'}
+2025-11-15 12:37:20,156 [INFO] jarvis_agent - Responding directly to user. Length=387 chars
+2025-11-15 12:40:15,430 [INFO] jarvis_agent - Selected backend: hf
+2025-11-15 12:40:15,430 [INFO] jarvis_agent - Initializing Hugging Face client with model=gpt2
+2025-11-15 12:40:15,430 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:40:23,817 [INFO] jarvis_agent - User message: 'hello jarvis'
+2025-11-15 12:40:23,817 [INFO] jarvis_agent - Calling LLM backend 'hf' with prompt length=1924 chars
+2025-11-15 12:40:24,319 [INFO] httpx - HTTP Request: GET https://huggingface.co/api/models/gpt2?expand=inferenceProviderMapping "HTTP/1.1 307 Temporary Redirect"
+2025-11-15 12:40:25,023 [INFO] httpx - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2?expand=inferenceProviderMapping "HTTP/1.1 200 OK"
+2025-11-15 12:40:25,023 [ERROR] jarvis_agent - Error calling Hugging Face model: 
+2025-11-15 12:40:25,023 [INFO] jarvis_agent - Parsed JSON action: {'action': 'respond', 'content': "I couldn't reach the Hugging Face model due to an error.\n\nTechnical details: "}
+2025-11-15 12:40:25,023 [INFO] jarvis_agent - Responding directly to user. Length=76 chars
+2025-11-15 12:40:57,676 [INFO] jarvis_agent - User message: 'remember that my youtube channel name is Tech TrendX'
+2025-11-15 12:40:57,677 [INFO] jarvis_agent - Calling LLM backend 'hf' with prompt length=2071 chars
+2025-11-15 12:40:57,677 [ERROR] jarvis_agent - Error calling Hugging Face model: 
+2025-11-15 12:40:57,677 [INFO] jarvis_agent - Parsed JSON action: {'action': 'respond', 'content': "I couldn't reach the Hugging Face model due to an error.\n\nTechnical details: "}
+2025-11-15 12:40:57,677 [INFO] jarvis_agent - Responding directly to user. Length=76 chars
+2025-11-15 12:44:08,406 [INFO] jarvis_agent - Selected backend: mock
+2025-11-15 12:44:08,406 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-15 12:44:14,474 [INFO] jarvis_agent - User message: 'hello jarvis'
+2025-11-15 12:44:14,474 [INFO] jarvis_agent - Mock action: {'action': 'respond', 'content': "Hi, I'm Jarvis running in offline mock mode. I received: hello jarvis"}
+2025-11-15 12:45:27,395 [INFO] jarvis_agent - User message: 'remember that my youtube channel name is Tech TrendX'
+2025-11-15 12:45:27,395 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'remember_info', 'args': {'note': 'my youtube channel name is Tech TrendX'}}
+2025-11-15 12:45:27,395 [INFO] jarvis_agent - Running tool 'remember_info' with args={'note': 'my youtube channel name is Tech TrendX'}
+2025-11-15 12:45:27,395 [INFO] jarvis_agent.tools - Tool remember_info called with note='my youtube channel name is Tech TrendX'
+2025-11-15 12:45:27,395 [WARNING] jarvis_agent.tools - JSON decode error for D:\My Projects\gemini_concierge_agent\memory.json, resetting to default
+2025-11-15 12:45:27,395 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\memory.json
+2025-11-15 12:45:27,395 [INFO] jarvis_agent.tools - remember_info saved note at 2025-11-15T12:45:27
+2025-11-15 12:45:27,395 [INFO] jarvis_agent - Tool 'remember_info' completed. Result length=49 chars
+2025-11-15 12:45:36,753 [INFO] jarvis_agent - User message: 'recall memory'
+2025-11-15 12:45:36,753 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'recall_memory', 'args': {}}
+2025-11-15 12:45:36,753 [INFO] jarvis_agent - Running tool 'recall_memory' with args={}
+2025-11-15 12:45:36,753 [INFO] jarvis_agent.tools - Tool recall_memory called
+2025-11-15 12:45:36,753 [INFO] jarvis_agent.tools - recall_memory returning 1 notes
+2025-11-15 12:45:36,753 [INFO] jarvis_agent - Tool 'recall_memory' completed. Result length=93 chars
+2025-11-15 12:45:46,707 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-15 12:45:46,707 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'web_search', 'args': {'query': 'search todays ai news'}}
+2025-11-15 12:45:46,707 [INFO] jarvis_agent - Running tool 'web_search' with args={'query': 'search todays ai news'}
+2025-11-15 12:45:46,707 [INFO] jarvis_agent.tools - Tool web_search called with query='search todays ai news'
+2025-11-15 12:45:46,958 [ERROR] jarvis_agent.tools - Web search status code: 202
+2025-11-15 12:45:46,958 [INFO] jarvis_agent - Tool 'web_search' completed. Result length=38 chars
+2025-11-15 12:46:04,035 [INFO] jarvis_agent - User message: 'set a reminder to revise python in 5 minutes'
+2025-11-15 12:46:04,035 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'set_reminder', 'args': {'message': 'set a reminder to revise python in 5 minutes', 'minutes_from_now': 5}}
+2025-11-15 12:46:04,035 [INFO] jarvis_agent - Running tool 'set_reminder' with args={'message': 'set a reminder to revise python in 5 minutes', 'minutes_from_now': 5}
+2025-11-15 12:46:04,035 [INFO] jarvis_agent.tools - Tool set_reminder called with message='set a reminder to revise python in 5 minutes', minutes_from_now=5
+2025-11-15 12:46:04,035 [WARNING] jarvis_agent.tools - JSON decode error for D:\My Projects\gemini_concierge_agent\reminders.json, resetting to default
+2025-11-15 12:46:04,035 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\reminders.json
+2025-11-15 12:46:04,035 [INFO] jarvis_agent.tools - set_reminder created reminder due at 2025-11-15T12:51:04
+2025-11-15 12:46:04,035 [INFO] jarvis_agent - Tool 'set_reminder' completed. Result length=110 chars
+2025-11-15 12:46:12,629 [INFO] jarvis_agent - User message: 'check reminders'
+2025-11-15 12:46:12,629 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'set_reminder', 'args': {'message': 'check reminders', 'minutes_from_now': 5}}
+2025-11-15 12:46:12,629 [INFO] jarvis_agent - Running tool 'set_reminder' with args={'message': 'check reminders', 'minutes_from_now': 5}
+2025-11-15 12:46:12,629 [INFO] jarvis_agent.tools - Tool set_reminder called with message='check reminders', minutes_from_now=5
+2025-11-15 12:46:12,630 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\reminders.json
+2025-11-15 12:46:12,630 [INFO] jarvis_agent.tools - set_reminder created reminder due at 2025-11-15T12:51:12
+2025-11-15 12:46:12,630 [INFO] jarvis_agent - Tool 'set_reminder' completed. Result length=81 chars
+2025-11-17 18:55:41,585 [INFO] jarvis_agent - Selected backend: mock
+2025-11-17 18:55:41,585 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-17 18:57:52,707 [INFO] jarvis_agent - User message: 'hello jarvis'
+2025-11-17 18:57:52,709 [INFO] jarvis_agent - Mock action: {'action': 'respond', 'content': "Hi, I'm Jarvis running in offline mock mode. I received: hello jarvis"}
+2025-11-17 18:58:09,588 [INFO] jarvis_agent - User message: 'remember that my youtube channel name is Tech TrendX'
+2025-11-17 18:58:09,595 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'remember_info', 'args': {'note': 'my youtube channel name is Tech TrendX'}}
+2025-11-17 18:58:09,595 [INFO] jarvis_agent - Running tool 'remember_info' with args={'note': 'my youtube channel name is Tech TrendX'}
+2025-11-17 18:58:09,595 [INFO] jarvis_agent.tools - Tool remember_info called with note='my youtube channel name is Tech TrendX'
+2025-11-17 18:58:09,605 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\memory.json
+2025-11-17 18:58:09,605 [INFO] jarvis_agent.tools - remember_info saved note at 2025-11-17T18:58:09
+2025-11-17 18:58:09,605 [INFO] jarvis_agent - Tool 'remember_info' completed. Result length=49 chars
+2025-11-17 18:58:19,685 [INFO] jarvis_agent - User message: 'recall memory'
+2025-11-17 18:58:19,685 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'recall_memory', 'args': {}}
+2025-11-17 18:58:19,685 [INFO] jarvis_agent - Running tool 'recall_memory' with args={}
+2025-11-17 18:58:19,685 [INFO] jarvis_agent.tools - Tool recall_memory called
+2025-11-17 18:58:19,702 [INFO] jarvis_agent.tools - recall_memory returning 2 notes
+2025-11-17 18:58:19,702 [INFO] jarvis_agent - Tool 'recall_memory' completed. Result length=156 chars
+2025-11-17 18:58:46,461 [INFO] jarvis_agent - User message: 'search todays ai news'
+2025-11-17 18:58:46,461 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'web_search', 'args': {'query': 'search todays ai news'}}
+2025-11-17 18:58:46,461 [INFO] jarvis_agent - Running tool 'web_search' with args={'query': 'search todays ai news'}
+2025-11-17 18:58:46,461 [INFO] jarvis_agent.tools - Tool web_search called with query='search todays ai news'
+2025-11-17 18:58:46,737 [ERROR] jarvis_agent.tools - Web search status code: 202
+2025-11-17 18:58:46,737 [INFO] jarvis_agent - Tool 'web_search' completed. Result length=38 chars
+2025-11-17 18:58:55,145 [INFO] jarvis_agent - User message: 'set a reminder to revise python in 5 minutes'
+2025-11-17 18:58:55,145 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'set_reminder', 'args': {'message': 'set a reminder to revise python in 5 minutes', 'minutes_from_now': 5}}
+2025-11-17 18:58:55,145 [INFO] jarvis_agent - Running tool 'set_reminder' with args={'message': 'set a reminder to revise python in 5 minutes', 'minutes_from_now': 5}
+2025-11-17 18:58:55,145 [INFO] jarvis_agent.tools - Tool set_reminder called with message='set a reminder to revise python in 5 minutes', minutes_from_now=5
+2025-11-17 18:58:55,158 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\reminders.json
+2025-11-17 18:58:55,158 [INFO] jarvis_agent.tools - set_reminder created reminder due at 2025-11-17T19:03:55
+2025-11-17 18:58:55,158 [INFO] jarvis_agent - Tool 'set_reminder' completed. Result length=110 chars
+2025-11-17 18:59:05,451 [INFO] jarvis_agent - User message: 'check reminders'
+2025-11-17 18:59:05,451 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'check_reminders', 'args': {}}
+2025-11-17 18:59:05,455 [INFO] jarvis_agent - Running tool 'check_reminders' with args={}
+2025-11-17 18:59:05,455 [INFO] jarvis_agent.tools - Tool check_reminders called
+2025-11-17 18:59:05,467 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\reminders.json
+2025-11-17 18:59:05,467 [INFO] jarvis_agent.tools - check_reminders: 2 reminders due
+2025-11-17 18:59:05,467 [INFO] jarvis_agent - Tool 'check_reminders' completed. Result length=151 chars
+2025-11-17 18:59:14,395 [INFO] jarvis_agent - User message: 'read file sample.txt'
+2025-11-17 18:59:14,395 [INFO] jarvis_agent - Mock action: {'action': 'respond', 'content': "Hi, I'm Jarvis running in offline mock mode. I received: read file sample.txt"}
+2025-11-17 19:00:14,968 [INFO] jarvis_agent - Selected backend: mock
+2025-11-17 19:00:14,968 [INFO] jarvis_agent - GeminiAgent initialized with model=gemini-2.0-flash-thinking-exp-1219, max_dialogue_chars=8000
+2025-11-17 19:00:24,737 [INFO] jarvis_agent - User message: 'hello jarvis'
+2025-11-17 19:00:24,737 [INFO] jarvis_agent - Mock action: {'action': 'respond', 'content': "Hi, I'm Jarvis running in offline mock mode. I received: hello jarvis"}
+2025-11-17 19:03:09,814 [INFO] jarvis_agent - User message: 'remember that my youtube channel name is Tech TrendX'
+2025-11-17 19:03:09,814 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'remember_info', 'args': {'note': 'my youtube channel name is Tech TrendX'}}
+2025-11-17 19:03:09,815 [INFO] jarvis_agent - Running tool 'remember_info' with args={'note': 'my youtube channel name is Tech TrendX'}
+2025-11-17 19:03:09,815 [INFO] jarvis_agent.tools - Tool remember_info called with note='my youtube channel name is Tech TrendX'
+2025-11-17 19:03:09,815 [WARNING] jarvis_agent.tools - JSON decode error for D:\My Projects\gemini_concierge_agent\memory.json, resetting to default
+2025-11-17 19:03:09,815 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\memory.json
+2025-11-17 19:03:09,815 [INFO] jarvis_agent.tools - remember_info saved note at 2025-11-17T19:03:09
+2025-11-17 19:03:09,815 [INFO] jarvis_agent - Tool 'remember_info' completed. Result length=49 chars
+2025-11-17 19:04:49,195 [INFO] jarvis_agent - User message: 'remember that my name is "Madhu Sudhan Reddy kethari"'
+2025-11-17 19:04:49,195 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'remember_info', 'args': {'note': 'my name is "Madhu Sudhan Reddy kethari"'}}
+2025-11-17 19:04:49,195 [INFO] jarvis_agent - Running tool 'remember_info' with args={'note': 'my name is "Madhu Sudhan Reddy kethari"'}
+2025-11-17 19:04:49,195 [INFO] jarvis_agent.tools - Tool remember_info called with note='my name is "Madhu Sudhan Reddy kethari"'
+2025-11-17 19:04:49,195 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\memory.json
+2025-11-17 19:04:49,195 [INFO] jarvis_agent.tools - remember_info saved note at 2025-11-17T19:04:49
+2025-11-17 19:04:49,195 [INFO] jarvis_agent - Tool 'remember_info' completed. Result length=49 chars
+2025-11-17 19:06:25,016 [INFO] jarvis_agent - User message: 'recall memory'
+2025-11-17 19:06:25,016 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'recall_memory', 'args': {}}
+2025-11-17 19:06:25,016 [INFO] jarvis_agent - Running tool 'recall_memory' with args={}
+2025-11-17 19:06:25,016 [INFO] jarvis_agent.tools - Tool recall_memory called
+2025-11-17 19:06:25,016 [INFO] jarvis_agent.tools - recall_memory returning 2 notes
+2025-11-17 19:06:25,016 [INFO] jarvis_agent - Tool 'recall_memory' completed. Result length=157 chars
+2025-11-17 19:10:00,568 [INFO] jarvis_agent - User message: 'set a reminder to revise python in 5 minutes'
+2025-11-17 19:10:00,568 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'set_reminder', 'args': {'message': 'set a reminder to revise python in 5 minutes', 'minutes_from_now': 5}}
+2025-11-17 19:10:00,578 [INFO] jarvis_agent - Running tool 'set_reminder' with args={'message': 'set a reminder to revise python in 5 minutes', 'minutes_from_now': 5}
+2025-11-17 19:10:00,579 [INFO] jarvis_agent.tools - Tool set_reminder called with message='set a reminder to revise python in 5 minutes', minutes_from_now=5
+2025-11-17 19:10:00,579 [WARNING] jarvis_agent.tools - JSON decode error for D:\My Projects\gemini_concierge_agent\reminders.json, resetting to default
+2025-11-17 19:10:00,581 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\reminders.json
+2025-11-17 19:10:00,583 [INFO] jarvis_agent.tools - set_reminder created reminder due at 2025-11-17T19:15:00
+2025-11-17 19:10:00,583 [INFO] jarvis_agent - Tool 'set_reminder' completed. Result length=110 chars
+2025-11-17 19:24:23,837 [INFO] jarvis_agent - User message: 'check reminders'
+2025-11-17 19:24:23,837 [INFO] jarvis_agent - Mock action: {'action': 'tool', 'name': 'check_reminders', 'args': {}}
+2025-11-17 19:24:23,837 [INFO] jarvis_agent - Running tool 'check_reminders' with args={}
+2025-11-17 19:24:23,837 [INFO] jarvis_agent.tools - Tool check_reminders called
+2025-11-17 19:24:23,837 [INFO] jarvis_agent.tools - Saved JSON to D:\My Projects\gemini_concierge_agent\reminders.json
+2025-11-17 19:24:23,837 [INFO] jarvis_agent.tools - check_reminders: 1 reminders due
+2025-11-17 19:24:23,837 [INFO] jarvis_agent - Tool 'check_reminders' completed. Result length=104 chars
+
