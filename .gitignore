@@ -5,3 +5,4 @@ agent.py
 tools.py
 reminders.json
 memory.json
+agent.log
